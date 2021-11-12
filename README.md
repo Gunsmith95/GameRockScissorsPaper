@@ -1,1 +1,2 @@
 # GameRockScissorsPaper
+изменения через браузер 
