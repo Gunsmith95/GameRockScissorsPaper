@@ -2,8 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissorsLizardSpoke {
-	private RockPaperScissorsLizardSpoke.User user = new RockPaperScissorsLizardSpoke.User();
-	private RockPaperScissorsLizardSpoke.Computer computer = new RockPaperScissorsLizardSpoke.Computer();
+	private final RockPaperScissorsLizardSpoke.User user = new User();
+	private final RockPaperScissorsLizardSpoke.Computer computer = new Computer();
 	private int userScore = 0;
 	private int computerScore = 0;
 	private int numberOfGames = 0;
@@ -16,16 +16,15 @@ public class RockPaperScissorsLizardSpoke {
 		System.out.println("Ход компьютера " + computerMove + ".\n");
 		int compareMove = userMove.compareMove(computerMove);
 		switch (compareMove) {
-			case - 1:
+			case - 1 -> {
 				System.out.println(computerMove + " beats " + userMove + ". Вы проиграли.");
 				++ this.computerScore;
-				break;
-			case 0:
-				System.out.println("Ничья!");
-				break;
-			case 1:
+			}
+			case 0 -> System.out.println("Ничья!");
+			case 1 -> {
 				System.out.println(userMove + " beats " + computerMove + ". Вы победили!");
 				++ this.userScore;
+			}
 		}
 
 		++ this.numberOfGames;
@@ -79,7 +78,7 @@ public class RockPaperScissorsLizardSpoke {
 		game.starGames();
 	}
 
-	private class Computer {
+	private static class Computer {
 		private Computer() {
 		}
 
@@ -91,8 +90,8 @@ public class RockPaperScissorsLizardSpoke {
 		}
 	}
 
-	private class User {
-		private Scanner inputScaner;
+	private static class User {
+		private final Scanner inputScaner;
 
 		public User() {
 			this.inputScaner = new Scanner(System.in);
@@ -104,21 +103,26 @@ public class RockPaperScissorsLizardSpoke {
 			char firstLetter = userInput.charAt(0);
 			if (firstLetter == '1' || firstLetter == '2' || firstLetter == '3' || firstLetter == '4' || firstLetter == '5') {
 				switch (firstLetter) {
-					case '1':
+					case '1' -> {
 						System.out.println("Вы выбрали камень");
-						return RockPaperScissorsLizardSpoke.Move.ROCK;
-					case '2':
+						return Move.ROCK;
+					}
+					case '2' -> {
 						System.out.println("Вы выбрали ножницы");
-						return RockPaperScissorsLizardSpoke.Move.SCISSORS;
-					case '3':
+						return Move.SCISSORS;
+					}
+					case '3' -> {
 						System.out.println("Вы выбрали бумага");
-						return RockPaperScissorsLizardSpoke.Move.PAPER;
-					case '4':
+						return Move.PAPER;
+					}
+					case '4' -> {
 						System.out.println("Вы выбрали ящерица");
-						return RockPaperScissorsLizardSpoke.Move.LIZARD;
-					case '5':
+						return Move.LIZARD;
+					}
+					case '5' -> {
 						System.out.println("Вы выбрали спок");
-						return RockPaperScissorsLizardSpoke.Move.SPOKE;
+						return Move.SPOKE;
+					}
 				}
 			}
 
@@ -134,14 +138,14 @@ public class RockPaperScissorsLizardSpoke {
 		}
 	}
 
-	private static enum Move {
+	private enum Move {
 		ROCK,
 		PAPER,
 		SCISSORS,
 		LIZARD,
 		SPOKE;
 
-		private Move() {
+		Move() {
 		}
 
 		private int compareMove(RockPaperScissorsLizardSpoke.Move otherMove) {
